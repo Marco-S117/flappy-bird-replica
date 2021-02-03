@@ -7,15 +7,12 @@
         class="arrow prev"
       />
     </transition>
-
     <transition :name="`to-${direction}-slide`" mode="out-in">
       <Bird
         :key="colorIndex"
         :color="birdColor"
-        class="bird"
       />
     </transition>
-
     <transition name="fade" mode="out-in">
       <BtnArrow
         v-show="showNext"
@@ -23,7 +20,6 @@
         class="arrow next"
       />
     </transition>
-
   </div>
 </template>
 
@@ -41,6 +37,9 @@ export default {
       direction: ''
     }
   },
+  beforeDestroy () {
+    this.$root.birdColor = this.birdColors[this.colorIndex]
+  },
   computed: {
     showPrev () {
       return this.colorIndex > 0
@@ -49,21 +48,28 @@ export default {
       return this.colorIndex < (this.birdColors.length - 1)
     },
     birdColor () {
-      console.log(this.birdColors[this.colorIndex], this.colorIndex)
       return this.birdColors[this.colorIndex]
     }
   },
   methods: {
-    onPrevClick () {
-      if (this.colorIndex > 0) {
+    onElementClicked (element) {
+      element.classList.add('clicked')
+      setTimeout(() => {
+        element.classList.remove('clicked')
+      }, 350)
+    },
+    onPrevClick (e) {
+      if (this.colorIndex > 0 && !e.target.classList.contains('clicked')) {
         this.colorIndex--
         this.direction = 'left'
+        this.onElementClicked(e.target)
       }
     },
-    onNextClick () {
-      if (this.colorIndex < (this.birdColors.length - 1)) {
+    onNextClick (e) {
+      if (this.colorIndex < (this.birdColors.length - 1) && !e.target.classList.contains('clicked')) {
         this.colorIndex++
         this.direction = 'right'
+        this.onElementClicked(e.target)
       }
     }
   }
@@ -92,13 +98,5 @@ export default {
     right: 0;
     transform: rotate(90deg);
   }
-}
-
-.bird {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
 }
 </style>

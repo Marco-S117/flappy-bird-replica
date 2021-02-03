@@ -23,5 +23,10 @@ export default {
 .bird {
   width: 75px;
   height: auto;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

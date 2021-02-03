@@ -1,5 +1,9 @@
 <template>
   <div>
+    <transition name="fade" mode="out-in">
+      <AudioPlayer v-show="$route.name !== 'play'" />
+    </transition>
+
     <!-- Bg -->
     <Background />
 
@@ -7,17 +11,22 @@
 
     <!-- View -->
     <Nuxt />
-
-    <!-- Footer -->
   </div>
 </template>
 
 <script>
+import AudioPlayer from '@/components/atoms/AudioPlayer'
 import Background from '@/components/atoms/Background'
 
 export default {
   name: 'Default',
-  components: { Background }
+  components: { AudioPlayer, Background },
+  created () {
+    if (window.location.hostname.indexOf('localhost', -1)) {
+      window.addEventListener('dblclick', () => { return false })
+      window.oncontextmenu = () => { return false }
+    }
+  }
 }
 </script>
 
@@ -89,6 +98,15 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
+  ::-moz-selection {
+    color: inherit;
+    background: transparent;
+  }
+  ::selection {
+    color: inherit;
+    background: transparent;
+  }
 }
 
 /* Helper design class */

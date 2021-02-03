@@ -1,5 +1,9 @@
 <template>
-  <button type="button" v-on="$listeners">
+  <button
+    type="button"
+    v-on="$listeners"
+    @click="$nuxt.$emit('play-audio', 'wing')"
+  >
     <img :src="Arrow" class="arrow">
   </button>
 </template>
@@ -28,6 +32,11 @@ button {
   img.arrow {
     width: 50px;
     height: 50px;
+    transition: all 0.35s ease-in-out;
+
+    &.clicked {
+      transform: scale(1.2) !important;
+    }
   }
 }
 </style>

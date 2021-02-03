@@ -4,14 +4,18 @@
     <BirdColorSelector />
     <div>
       <BtnWithIcon
+        action="nuxt-link"
+        to="/play"
         icon="play"
-        width="20"
-        height="20"
+        iconWidth="20"
+        iconHeight="20"
       />
       <BtnWithIcon
+        action="nuxt-link"
+        to="/ranking"
         icon="ranking"
-        width="30"
-        height="30"
+        iconWidth="30"
+        iconHeight="30"
       />
     </div>
   </div>
@@ -24,7 +28,11 @@ import BtnWithIcon from '@/components/atoms/BtnWithIcon'
 
 export default {
   name: 'HomePage',
-  components: { Logo, BirdColorSelector, BtnWithIcon }
+  components: { Logo, BirdColorSelector, BtnWithIcon },
+  beforeRouteLeave (to, from, next) {
+    this.$nuxt.$emit('play-audio', 'swoosh')
+    next()
+  }
 }
 </script>
 
