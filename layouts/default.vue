@@ -109,6 +109,10 @@ export default {
   }
 }
 
+html {
+  overflow: hidden;
+}
+
 /* Helper design class */
 .absolute {
   position: absolute;

@@ -1,9 +1,13 @@
 <template>
-  <div class="play-page-container absolute">
+  <div
+    @click="onClick"
+    class="play-page-container absolute"
+  >
     <Gamescore :points="score" />
     <Bird
       v-if="!!$root.birdColor"
       :color="$root.birdColor"
+      ref="bird"
     />
     <Block />
   </div>
@@ -24,27 +28,40 @@ export default {
   beforeMount () {
     this.$nuxt.$emit('game-started')
   },
+  mounted () {
+    if (this.$refs.bird) {
+      this.addGravity()
+    }
+  },
   beforeDestroy () {
     this.$nuxt.$emit('game-over')
   },
   data () {
     return {
-      score: 0
+      score: 0,
+      isJumping: false,
+      jumpsCount: 0
     }
   },
-  // mounted () {
-  //   let interval = setInterval(() => {
-  //     this.score++
+  methods: {
+    addGravity () {
+      setInterval(() => {
+        const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
 
-  //     if (this.score > 0) {
-  //       this.$nuxt.$emit('play-audio', 'point')
-  //     }
-
-  //     if (this.score === 11) {
-  //       clearInterval(interval)
-  //     }
-  //   }, 2500)
-  // }
+        if (!this.isJumping) {
+          this.$refs.bird.$el.style.top = (BIRD_TOP + 6) + 'px'
+        }
+      }, 40)
+    },
+    onClick () {
+      this.isJumping = true
+      const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
+      this.$refs.bird.$el.style.top = (BIRD_TOP - 75) + 'px'
+      setTimeout(() => {
+        this.isJumping = false
+      }, 10)
+    }
+  }
 }
 </script>
 
