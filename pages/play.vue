@@ -20,6 +20,8 @@ export default {
     if (!this.$root.birdColor) {
       this.$router.push({ name: 'index' })
     }
+
+    this.$nuxt.$emit('game-started')
   },
   data () {
     return {

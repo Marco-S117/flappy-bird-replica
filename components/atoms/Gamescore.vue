@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .gamescore-container {
-  z-index: 5;
+  z-index: 20;
   top: 15%;
   left: 50%;
   transform: translate(-15%, -50%);

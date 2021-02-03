@@ -6,13 +6,13 @@
     <img
       :src="block"
       width="38px"
-      :height="`${25}%`"
+      :height="`${top}%`"
       class="block-top absolute"
     >
     <div
       :style="{
-        height: `${25}%`,
-        top: `${25}%`
+        height: `${middle}%`,
+        top: `${top}%`
       }"
       class="hole absolute"
     >
@@ -20,7 +20,7 @@
     <img
       :src="block"
       width="38px"
-      :height="`${25}%`"
+      :height="`${bottom}%`"
       class="block-bottom absolute"
     >
   </div>
@@ -30,26 +30,16 @@
 export default {
   data () {
     return {
-      top: 0,
-      bottom: 0,
-      middle: 0
+      top: 25,
+      bottom: 25,
+      middle: 25
     }
   },
   mounted () {
     this.$refs.block.addEventListener('animationiteration', () => {
-      console.log('New block appear')
-      const RND = Math.floor(Math.random() * 24) + 1
-
-      // console.log(TOP_RND + '%')
-      // console.log(BOTTOM_RND + '%')
-
+      const RND = Math.floor(Math.random() * 50) + 1
       this.top = RND
-      this.middle = 100 - RND
-      this.bottom = RND
-
-      console.log('top', this.top, '%')
-      console.log('bottom', this.bottom, '%')
-      console.log('middle', this.middle, '%')
+      this.bottom = 50 - this.top
     })
   },
   computed: {
@@ -67,7 +57,7 @@ export default {
   right: 0;
   width: 38px;
   height: 100%;
-  animation: slide-block 4s infinite linear;
+  animation: slide-block 5s infinite linear;
 }
 
 .block-top {
