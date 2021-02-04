@@ -58,7 +58,7 @@ export default {
   // }
 
   .score {
-    font-size: 64px;
+    font-size: 100px;
   }
 }
 </style>

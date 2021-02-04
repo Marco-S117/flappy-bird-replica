@@ -61,7 +61,7 @@ export default {
   width: 100px;
   height: 50px;
   border-radius: 10px;
-  border: 4px solid #543847;
+  border: 2px solid #543847;
   text-decoration: none;
   background: linear-gradient(0deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 100%);
 

@@ -1,26 +1,20 @@
 <template>
-  <div>
-    <transition name="fade" mode="out-in">
-      <AudioPlayer v-show="$route.name !== 'play'" />
-    </transition>
-
-    <!-- Bg -->
-    <Background />
-
-    <!-- Menu -->
-
-    <!-- View -->
-    <Nuxt />
+  <div class="app">
+    <div class="app-container">
+      <Header />
+      <Background />
+      <Nuxt />
+    </div>
   </div>
 </template>
 
 <script>
-import AudioPlayer from '@/components/atoms/AudioPlayer'
 import Background from '@/components/atoms/Background'
+import Header from '@/components/organisms/Header'
 
 export default {
   name: 'Default',
-  components: { AudioPlayer, Background },
+  components: { Header, Background },
   created () {
     if (window.location.hostname.indexOf('localhost', -1)) {
       window.addEventListener('dblclick', () => { return false })
@@ -111,6 +105,7 @@ export default {
 
 html {
   overflow: hidden;
+  background-color: grey;
 }
 
 /* Helper design class */
@@ -121,6 +116,23 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+.app {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .app-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 900px;
   }
 }
 </style>
