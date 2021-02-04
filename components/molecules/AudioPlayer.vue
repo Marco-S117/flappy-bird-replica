@@ -1,7 +1,7 @@
 <template>
   <div class="audio-player">
-    <btn-with-icon
-      @click="audioEnabled = !audioEnabled"
+    <BtnWithIcon
+      @click="onClick"
       action="button"
       :icon="audioEnabled ? 'audio-on': 'audio-off'"
       iconWidth="24"
@@ -21,19 +21,31 @@
 </template>
 
 <script>
-import BtnWithIcon from './BtnWithIcon.vue'
+import BtnWithIcon from '@/components/atoms/BtnWithIcon'
+import die from '@/assets/audio/die.ogg'
+import hit from '@/assets/audio/hit.ogg'
+import point from '@/assets/audio/point.ogg'
+import swoosh from '@/assets/audio/swoosh.ogg'
+import wing from '@/assets/audio/wing.ogg'
+import click from '@/assets/audio/click.ogg'
+
 export default {
   components: { BtnWithIcon },
   name: 'AudioPlayer',
   data () {
     return {
       audioEnabled: true,
-      audio: null
+      audio: null,
+      die,
+      hit,
+      point,
+      swoosh,
+      wing,
+      click
     }
   },
   mounted () {
     this.$nuxt.$on('play-audio', (audio) => {
-      console.log(audio);
       this.audio = audio
       if (this.audioEnabled) {
         this.$nextTick(() => {
@@ -44,9 +56,15 @@ export default {
   },
   computed: {
     current () {
-      return require(`@/assets/audio/${this.audio}.ogg`)
+      return this[this.audio]
     }
   },
+  methods: {
+    onClick () {
+      this.audioEnabled = !this.audioEnabled
+      this.$nuxt.$emit('play-audio', 'click')
+    }
+  }
 }
 </script>
 
