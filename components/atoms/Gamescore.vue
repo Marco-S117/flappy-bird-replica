@@ -9,7 +9,7 @@
         width="60px"
         height="auto"
       > -->
-      <h1 class="flappy-font score">{{ points }}</h1>
+      <h1 class="flappy-font score">{{ score }}</h1>
     </div>
   </div>
 </template>
@@ -18,24 +18,24 @@
 export default {
   name: 'Gamescore',
   props: {
-    points: {
+    score: {
       type: Number,
       required: false
     }
   },
-  data () {
-    return {
-      score: []
-    }
-  },
+  // data () {
+  //   return {
+  //     imgScore: []
+  //   }
+  // },
   computed: {
     // TO DO: Implemetare punteggio con immagini
     // gamescore () {
-    //   this.points.toString().split('').forEach(n => {
-    //     this.score.push(require(`@/assets/sprites/points/${n}.png`))
+    //   this.score.toString().split('').forEach(n => {
+    //     this.imgScore.push(require(`@/assets/sprites/score/${n}.png`))
     //   })
 
-    //   return this.score
+    //   return this.imgScore
     // }
   }
 }

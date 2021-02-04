@@ -3,7 +3,7 @@
     @click="onClick"
     class="play-page-container absolute"
   >
-    <Gamescore :points="score" />
+    <Gamescore :score="score" />
     <Bird
       v-if="!!$root.birdColor"
       :color="$root.birdColor"
