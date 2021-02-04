@@ -20,6 +20,16 @@ export default {
       window.addEventListener('dblclick', () => { return false })
       window.oncontextmenu = () => { return false }
     }
+
+    this.$root.settings = {
+      grativy: 6,
+      jump: 130
+    }
+  },
+  watch: {
+    $route () {
+      this.$nuxt.$emit('play-audio', 'click')
+    }
   }
 }
 </script>
@@ -105,7 +115,7 @@ export default {
 
 html {
   overflow: hidden;
-  background-color: grey;
+  background-color: #333333;
 }
 
 /* Helper design class */
@@ -133,6 +143,7 @@ html {
     width: 100%;
     height: 100%;
     max-width: 900px;
+    border: 4px solid #ffffff;
   }
 }
 </style>

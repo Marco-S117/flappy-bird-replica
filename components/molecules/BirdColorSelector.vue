@@ -11,6 +11,7 @@
       <Bird
         :key="colorIndex"
         :color="birdColor"
+        state="midflap"
       />
     </transition>
     <transition name="fade" mode="out-in">

@@ -3,17 +3,22 @@
 </template>
 
 <script>
+
 export default {
   name: 'Bird',
   props: {
     color: {
       type: String,
       required: true
+    },
+    state: {
+      type: String,
+      required: false
     }
   },
   computed: {
     birdImage () {
-      return require(`@/assets/sprites/birds/${this.color}/upflap.png`)
+      return require(`@/assets/sprites/birds/${this.color}/${this.state}.png`)
     }
   }
 }

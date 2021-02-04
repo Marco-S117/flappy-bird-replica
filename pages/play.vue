@@ -7,7 +7,9 @@
     <Bird
       v-if="!!$root.birdColor"
       :color="$root.birdColor"
+      :state="birdState"
       ref="bird"
+      class="isPlaying-bird"
     />
     <Block />
   </div>
@@ -40,7 +42,7 @@ export default {
     return {
       score: 0,
       isJumping: false,
-      jumpsCount: 0
+      birdState: 'downflap' // 'downflap', midflap, 'upflap'
     }
   },
   methods: {
@@ -49,17 +51,22 @@ export default {
         const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
 
         if (!this.isJumping) {
-          this.$refs.bird.$el.style.top = (BIRD_TOP + 6) + 'px'
+          this.$refs.bird.$el.style.top = (BIRD_TOP + this.$root.settings.grativy) + 'px'
         }
-      }, 40)
+      }, 20)
     },
     onClick () {
-      this.isJumping = true
       const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
-      this.$refs.bird.$el.style.top = (BIRD_TOP - 75) + 'px'
+      this.$refs.bird.$el.style.top = (BIRD_TOP - this.$root.settings.jump) + 'px'
+
+      this.$nuxt.$emit('play-audio', 'wing')
+      this.isJumping = true
+      this.birdState = 'upflap'
+
       setTimeout(() => {
         this.isJumping = false
-      }, 10)
+        this.birdState = 'downflap'
+      }, 100)
     }
   }
 }
@@ -70,5 +77,9 @@ export default {
   height: 100%;
   width: 100%;
   overflow: hidden;
+
+  .isPlaying-bird {
+    transition: top 0.001s linear;
+  }
 }
 </style>

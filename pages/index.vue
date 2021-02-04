@@ -28,11 +28,7 @@ import BtnWithIcon from '@/components/atoms/BtnWithIcon'
 
 export default {
   name: 'HomePage',
-  components: { Logo, BirdColorSelector, BtnWithIcon },
-  beforeRouteLeave (to, from, next) {
-    this.$nuxt.$emit('play-audio', 'swoosh')
-    next()
-  }
+  components: { Logo, BirdColorSelector, BtnWithIcon }
 }
 </script>
 
