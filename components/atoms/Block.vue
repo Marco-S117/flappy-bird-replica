@@ -4,7 +4,7 @@
     class="block-container absolute"
   >
     <img
-      :src="block"
+      :src="GreenPipe"
       :height="`${top}%`"
       class="block-top absolute"
     >
@@ -17,7 +17,7 @@
     >
     </div>
     <img
-      :src="block"
+      :src="GreenPipe"
       :height="`${bottom}%`"
       class="block-bottom absolute"
     >
@@ -25,9 +25,12 @@
 </template>
 
 <script>
+import GreenPipe from '@/assets/sprites/pipe-green.png'
+
 export default {
   data () {
     return {
+      GreenPipe,
       top: 25,
       bottom: 25,
       middle: 25,
@@ -40,15 +43,6 @@ export default {
       this.top = this.random
       this.bottom = 50 - this.top
     })
-  },
-  computed: {
-    block () {
-      return this.random < 25
-        ?  require(`@/assets/sprites/pipe-green.png`)
-        :  require(`@/assets/sprites/pipe-red.png`)
-
-
-    }
   }
 }
 </script>
