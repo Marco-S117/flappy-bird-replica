@@ -5,7 +5,6 @@
   >
     <img
       :src="block"
-      width="38px"
       :height="`${top}%`"
       class="block-top absolute"
     >
@@ -19,7 +18,6 @@
     </div>
     <img
       :src="block"
-      width="38px"
       :height="`${bottom}%`"
       class="block-bottom absolute"
     >
@@ -32,19 +30,24 @@ export default {
     return {
       top: 25,
       bottom: 25,
-      middle: 25
+      middle: 25,
+      random: 0
     }
   },
   mounted () {
     this.$refs.block.addEventListener('animationiteration', () => {
-      const RND = Math.floor(Math.random() * 50) + 1
-      this.top = RND
+      this.random = Math.floor(Math.random() * 50) + 1
+      this.top = this.random
       this.bottom = 50 - this.top
     })
   },
   computed: {
     block () {
-      return require(`@/assets/sprites/pipe-red.png`)
+      return this.random < 25
+        ?  require(`@/assets/sprites/pipe-green.png`)
+        :  require(`@/assets/sprites/pipe-red.png`)
+
+
     }
   }
 }
@@ -54,33 +57,38 @@ export default {
 .block-container {
   z-index: 10;
   top: 0;
-  right: 0;
-  width: 38px;
+  right: -75px;
+  width: 75px;
   height: 100%;
   animation: slide-block 5s infinite linear;
+
+  img {
+    width: 75px;
+  }
+
+  .block-top {
+    top: 0;
+    right: 0;
+    transform: scale(-1);
+  }
+
+  .hole {
+    right: 0;
+    width: 75px;
+    background-color: rgba(0, 255, 34, 0.4);
+  }
+
+  .block-bottom {
+    bottom: 25%;
+    right: 0;
+  }
 }
 
-.block-top {
-  top: 0;
-  right: 0;
-  transform: scale(-1);
-}
-
-.hole {
-  right: 0;
-  width: 38px;
-  background-color: rgba(0, 255, 34, 0.4);
-}
-
-.block-bottom {
-  bottom: 25%;
-  right: 0;
-}
 
 @keyframes slide-block {
   from {
     top: 0;
-    right: 0;
+    right: -75px;
   }
   to {
     top: 0;

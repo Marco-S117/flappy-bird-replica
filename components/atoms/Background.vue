@@ -1,11 +1,14 @@
 <template>
   <div class="bg-container absolute center">
-    <div
-      :style="{ backgroundImage: `url(${BgImageNight})` }"
-      :class="{ 'moving': moving }"
-      class="landscape"
-    >
-    </div>
+    <transition name="fade" mode="out-in">
+      <div
+        :key="nightMode"
+        :style="{ backgroundImage: `url(${backgroundImage})` }"
+        :class="{ 'moving': moving }"
+        class="landscape"
+      >
+      </div>
+    </transition>
     <div
       :style="{ backgroundImage: `url(${BgImageFloor})` }"
       :class="{ 'moving': moving }"
@@ -25,13 +28,22 @@ export default {
   beforeMount () {
     this.$nuxt.$on('game-started', () => { this.moving = true })
     this.$nuxt.$on('game-over', () => { this.moving = false })
+    this.$nuxt.$on('toggle-night-mode', (state) => { this.nightMode = state })
   },
   data () {
     return {
+      nightMode: false,
       BgImageDay,
       BgImageNight,
       BgImageFloor,
       moving: false
+    }
+  },
+  computed: {
+    backgroundImage () {
+      return this.nightMode
+        ? this.BgImageNight
+        : this.BgImageDay
     }
   }
 }
@@ -49,7 +61,7 @@ export default {
     background-repeat: repeat-x;
 
     &.moving {
-      animation: moving-bg 17s linear infinite;
+      animation: moving-bg 10s infinite linear;
     }
 
     &.landscape {
@@ -68,7 +80,7 @@ export default {
 
 @keyframes moving-bg {
   100% {
-    background-position: -3000px 0;
+    background-position: -200vw 0;
   }
 }
 </style>
