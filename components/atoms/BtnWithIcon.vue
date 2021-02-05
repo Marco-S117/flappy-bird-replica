@@ -62,11 +62,21 @@ export default {
   height: 50px;
   border-radius: 10px;
   border: 2px solid #543847;
+  border-bottom: 4px solid #543847;
   text-decoration: none;
   background: linear-gradient(0deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 100%);
 
   &.squared {
-    width: 50px;
+    width: 44px;
+    height: 44px;
   }
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
 }
 </style>

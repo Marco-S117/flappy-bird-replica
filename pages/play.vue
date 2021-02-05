@@ -1,11 +1,11 @@
 <template>
   <div
-    @click="onClick"
+    v-if="!!$root.birdColor"
+    @click="fly"
     class="play-page-container absolute"
   >
     <Gamescore :score="score" />
     <Bird
-      v-if="!!$root.birdColor"
       :color="$root.birdColor"
       :state="birdState"
       ref="bird"
@@ -22,12 +22,10 @@ import Block from '@/components/atoms/Block'
 
 export default {
   components: { Gamescore, Bird, Block },
-  beforeCreate () {
+  beforeMount () {
     if (!this.$root.birdColor) {
       this.$router.push({ name: 'index' })
     }
-  },
-  beforeMount () {
     this.$nuxt.$emit('game-started')
   },
   mounted () {
@@ -55,7 +53,7 @@ export default {
         }
       }, 20)
     },
-    onClick () {
+    fly () {
       const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
       this.$refs.bird.$el.style.top = (BIRD_TOP - this.$root.settings.jump) + 'px'
 

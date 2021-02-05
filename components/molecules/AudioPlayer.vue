@@ -1,5 +1,5 @@
 <template>
-  <div class="audio-player">
+  <div>
     <BtnWithIcon
       @click="onClick"
       action="button"
@@ -67,12 +67,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.audio-player {
-  position: absolute;
-  z-index: 3;
-  top: 20px;
-  right: 20px;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-switcher">
+  <div>
     <BtnWithIcon
       @click="onClick"
       action="button"
@@ -31,12 +31,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.theme-switcher {
-  position: absolute;
-  z-index: 3;
-  top: 20px;
-  right: 80px;
-}
-</style>

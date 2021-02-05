@@ -3,7 +3,9 @@
     <div class="app-container">
       <Header />
       <Background />
-      <Nuxt />
+      <transition name="fade" mode="out-in">
+        <Nuxt />
+      </transition>
     </div>
   </div>
 </template>
@@ -27,7 +29,7 @@ export default {
     }
   },
   watch: {
-    $route () {
+    $route (to, from) {
       this.$nuxt.$emit('play-audio', 'click')
     }
   }
@@ -47,6 +49,7 @@ export default {
 
 .to-left-slide-enter-active,
 .to-left-slide-leave-active {
+  transform-origin: top;
   transition: all 0.4s;
 }
 
@@ -63,6 +66,7 @@ export default {
 
 .to-right-slide-enter-active,
 .to-right-slide-leave-active {
+  transform-origin: top;
   transition: all 0.4s;
 }
 .to-right-slide-enter {
@@ -79,26 +83,28 @@ export default {
 
 /* Typography */
 @font-face {
-  font-family: FlappyBird;
+  font-family: ArcadeFont;
   src:
-    url('/fonts/flappy-font.woff') format('woff'),
-    url('/fonts/flappy-font.woff2') format('woff2'),
-    url('/fonts/flappy-font.ttf') format('ttf');
+    url('/fonts/arcade/arcade.woff') format('woff'),
+    url('/fonts/arcade/arcade.woff2') format('woff2'),
+    url('/fonts/arcade/arcade.ttf') format('ttf');
     font-style: normal;
     font-weight: 300;
     font-display: swap;
 }
 
-.flappy-font {
-  font-family: FlappyBird;
-  letter-spacing: 4px;
-  color: #fff;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #543847;
+h1 {
+  font-size: 64px;
+}
+
+p {
+  font-size: 18px;
 }
 
 /* Reset */
 * {
+  font-family: ArcadeFont;
+  color: #543847;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -142,7 +148,8 @@ html {
     position: relative;
     width: 100%;
     height: 100%;
-    max-width: 900px;
+    max-width: 420px;
+    max-height: 820px;
     border: 4px solid #ffffff;
   }
 }

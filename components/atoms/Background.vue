@@ -58,7 +58,7 @@ export default {
 
   div {
     width: 100%;
-    background-size: contain;
+    background-size: cover;
     background-repeat: repeat-x;
 
     &.moving {
@@ -71,10 +71,6 @@ export default {
 
     &.base {
       height: 25%;
-
-      @media screen and (max-width: 420px) {
-        background-size: cover;
-      }
     }
   }
 }
