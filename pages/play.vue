@@ -11,7 +11,7 @@
       ref="bird"
       class="isPlaying-bird"
     />
-    <Block />
+    <Block ref="block" />
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   },
   mounted () {
     if (this.$refs.bird) {
-      this.addGravity()
+      this.startGame()
     }
   },
   beforeDestroy () {
@@ -38,20 +38,20 @@ export default {
   },
   data () {
     return {
+      isScored: false,
       score: 0,
       isJumping: false,
       birdState: 'downflap' // 'downflap', midflap, 'upflap'
     }
   },
   methods: {
-    addGravity () {
+    startGame () {
       setInterval(() => {
-        const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
+        this.addGravity()
+      }, 10)
 
-        if (!this.isJumping) {
-          this.$refs.bird.$el.style.top = (BIRD_TOP + this.$root.settings.grativy) + 'px'
-        }
-      }, 20)
+      // BUG: Incremento multiplo del punteggio se si usa una setInterval
+      this.checkScore()
     },
     fly () {
       const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
@@ -65,6 +65,42 @@ export default {
         this.isJumping = false
         this.birdState = 'downflap'
       }, 100)
+    },
+    addGravity () {
+      const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
+      if (!this.isJumping) {
+        this.$refs.bird.$el.style.top = (BIRD_TOP + this.$root.settings.grativy) + 'px'
+      }
+    },
+    checkScore () {
+      const BIRD_LEFT = parseInt(this.$refs.bird.$el.getBoundingClientRect().left)
+      const HOLE_RIGHT = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().right)
+
+      this.isScored = false
+
+      if (BIRD_LEFT > HOLE_RIGHT && !this.isScored) {
+        this.isScored = true
+        this.score++
+      }
+    },
+    detectCollision () {
+      // Bird dom rect
+      const BIRD_TOP = parseInt(this.$refs.bird.$el.getBoundingClientRect().top)
+      const BIRD_RIGHT = parseInt(this.$refs.bird.$el.getBoundingClientRect().right)
+      const BIRD_BOTTOM = parseInt(this.$refs.bird.$el.getBoundingClientRect().bottom)
+      const BIRD_LEFT = parseInt(this.$refs.bird.$el.getBoundingClientRect().left)
+
+      // Top block dom rect
+      const TOP_BLOCK_TOP = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().top)
+      const TOP_BLOCK_RIGHT = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().right)
+      const TOP_BLOCK_BOTTOM = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().bottom)
+      const TOP_BLOCK_LEFT = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().left)
+
+      // Bottom block dom rect
+      const BOTTOM_BLOCK_TOP = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().top)
+      const BOTTOM_BLOCK_RIGHT = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().right)
+      const BOTTOM_BLOCK_BOTTOM = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().bottom)
+      const BOTTOM_BLOCK_LEFT = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().left)
     }
   }
 }
