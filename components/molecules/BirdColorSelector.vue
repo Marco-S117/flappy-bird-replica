@@ -45,8 +45,8 @@ export default {
   components: { Btn, Bird },
   data () {
     return {
-      colorIndex: 0,
-      birdColors: ['red', 'blue', 'yellow'],
+      colorIndex: 1,
+      birdColors: ['blue', 'red', 'yellow'],
       direction: ''
     }
   },
@@ -92,12 +92,13 @@ export default {
 .selector-appear-enter-active,
 .selector-appear-leave-active {
   transition: all 0.2s;
-  transition-delay: 1s;
+  transition-delay: 0.8s;
 }
 
 .selector-appear-enter,
 .selector-appear-leave-to {
   opacity: 0;
+  transform: translateY(20px);
 }
 
 .to-left-slide-enter-active,

@@ -28,17 +28,17 @@ export default {
 
   img {
     transition: all 0.2s;
-    transition-delay: 0.4s;
+    transition-delay: 0.2s;
   }
 
   hr {
     transition: all 0.2s;
-    transition-delay: 0.6s;
+    transition-delay: 0.4s;
   }
 
   p {
     transition: all 0.2s;
-    transition-delay: 0.8s;
+    transition-delay: 0.6s;
   }
 }
 
@@ -64,6 +64,7 @@ export default {
     height: 0;
     margin: 12px auto;
     border: 1px solid #ffffff;
+    box-shadow: 0px 2px #543847;
   }
 
   p {

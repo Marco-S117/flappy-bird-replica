@@ -4,8 +4,8 @@
       @click="onClick"
       action="button"
       :icon="audioEnabled ? 'audio-on': 'audio-off'"
-      iconWidth="20"
-      iconHeight="20"
+      iconWidth="18"
+      iconHeight="18"
       squared
     />
     <audio

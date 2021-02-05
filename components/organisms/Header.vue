@@ -3,19 +3,17 @@
     <header v-show="$route.name !== 'play'">
       <BtnBack class="header-btn btn-back" />
       <AudioPlayer class="header-btn audio-player" />
-      <ThemeSwitcher class="header-btn theme-switcher" />
     </header>
   </transition>
 </template>
 
 <script>
 import AudioPlayer from '@/components/molecules/AudioPlayer'
-import ThemeSwitcher from '@/components/molecules/ThemeSwitcher'
 import BtnBack from '@/components/molecules/BtnBack'
 
 export default {
   name: 'Header',
-  components: { AudioPlayer, ThemeSwitcher, BtnBack }
+  components: { AudioPlayer, BtnBack }
 }
 </script>
 

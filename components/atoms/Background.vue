@@ -1,8 +1,7 @@
 <template>
   <div class="bg-container absolute center">
-    <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in" appear>
       <div
-        :key="nightMode"
         :style="{ backgroundImage: `url(${backgroundImage})` }"
         :class="{ 'moving': moving }"
         class="landscape"
@@ -28,11 +27,9 @@ export default {
   beforeMount () {
     this.$nuxt.$on('game-started', () => { this.moving = true })
     this.$nuxt.$on('game-over', () => { this.moving = false })
-    this.$nuxt.$on('toggle-night-mode', (state) => { this.nightMode = state })
   },
   data () {
     return {
-      nightMode: false,
       BgImageDay,
       BgImageNight,
       BgImageFloor,
@@ -41,7 +38,7 @@ export default {
   },
   computed: {
     backgroundImage () {
-      return this.nightMode
+      return new Date().getHours() > 18
         ? this.BgImageNight
         : this.BgImageDay
     }
