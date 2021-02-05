@@ -1,11 +1,11 @@
 <template>
   <div>
-    <BtnWithIcon
+    <Btn
       @click="onClick"
       action="button"
       :icon="audioEnabled ? 'audio-on': 'audio-off'"
-      iconWidth="24"
-      iconHeight="24"
+      iconWidth="20"
+      iconHeight="20"
       squared
     />
     <audio
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import BtnWithIcon from '@/components/atoms/BtnWithIcon'
+import Btn from '@/components/atoms/Btn'
 import die from '@/assets/audio/die.ogg'
 import hit from '@/assets/audio/hit.ogg'
 import point from '@/assets/audio/point.ogg'
@@ -30,7 +30,7 @@ import wing from '@/assets/audio/wing.ogg'
 import click from '@/assets/audio/click.ogg'
 
 export default {
-  components: { BtnWithIcon },
+  components: { Btn },
   name: 'AudioPlayer',
   data () {
     return {

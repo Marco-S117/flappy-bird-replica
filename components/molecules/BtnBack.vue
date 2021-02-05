@@ -1,12 +1,12 @@
 <template>
   <transition name="fade" mode="out-in">
     <div v-show="$route.name !== 'index'">
-      <BtnWithIcon
+      <Btn
         action="nuxt-link"
         to="/"
         icon="arrow"
-        iconWidth="24"
-        iconHeight="24"
+        iconWidth="18"
+        iconHeight="18"
         squared
       />
     </div>
@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import BtnWithIcon from '../atoms/BtnWithIcon'
+import Btn from '../atoms/Btn'
 
 export default {
-  components: { BtnWithIcon }
+  components: { Btn }
 }
 </script>

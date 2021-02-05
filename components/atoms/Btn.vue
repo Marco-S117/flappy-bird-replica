@@ -6,8 +6,15 @@
     :class="{ 'squared': squared }"
     class="btn"
   >
+    <div
+      v-if="label"
+      class="label"
+    >
+      {{ label }}
+    </div>
     <img
-      :src="image"
+      v-if="!!icon"
+      :src="setIcon"
       :width="`${iconWidth}px`"
       :height="`${iconHeight}px`"
       class="absolute center"
@@ -17,35 +24,18 @@
 
 <script>
 export default {
-  name: 'BtnWithImage',
+  name: 'Btn',
   props: {
-    action: {
-      type: String,
-      required: false
-    },
-    to: {
-      type: String,
-      required: false
-    },
-    icon: {
-      type: String,
-      required: true
-    },
-    iconWidth: {
-      type: [String, Number],
-      required: true
-    },
-    iconHeight: {
-      type: [String, Number],
-      required: true
-    },
-    squared: {
-      type: Boolean,
-      required: false
-    }
+    action: { type: String },
+    to: { type: String },
+    label: { type: String },
+    icon: { type: String },
+    iconWidth: { type: [String, Number] },
+    iconHeight: { type: [String, Number] },
+    squared: { type: Boolean }
   },
   computed: {
-    image () {
+    setIcon () {
       return require(`@/assets/svg/${this.icon}.svg`)
     }
   }
@@ -67,8 +57,20 @@ export default {
   background: linear-gradient(0deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 100%);
 
   &.squared {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+    font-size: 18px;
+    color: #543847;
+    text-shadow: none;
+    letter-spacing: 1px;
   }
 
   img {

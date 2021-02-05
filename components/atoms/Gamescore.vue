@@ -1,9 +1,6 @@
 <template>
   <div class="gamescore-container absolute">
-    <div class="score absolute center">
-      <!-- TO DO: Spostare punteggio in alto a SX con icona moneta -->
-      <h1 class="score">{{ score }}</h1>
-    </div>
+    <p class="score">{{ score }}</p>
   </div>
 </template>
 
@@ -22,12 +19,13 @@ export default {
 <style lang="scss" scoped>
 .gamescore-container {
   z-index: 20;
-  top: 15%;
+  top: 24px;
   left: 50%;
-  transform: translate(-15%, -50%);
+  transform: translateX(-50%);
 
   .score {
-    font-size: 120px;
+    font-size: 84px;
+    line-height: 0.6;
   }
 }
 </style>

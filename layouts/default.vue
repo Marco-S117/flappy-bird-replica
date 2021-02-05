@@ -62,10 +62,12 @@ export default {
 h1 {
   font-size: 64px;
   text-shadow: 2px 2px #543847;
+  cursor: default;
 }
 
 p {
   font-size: 18px;
+  cursor: default;
 }
 
 /* Reset */

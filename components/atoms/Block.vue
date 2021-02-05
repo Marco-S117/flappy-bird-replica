@@ -51,13 +51,14 @@ export default {
 .block-container {
   z-index: 10;
   top: 0;
-  right: -75px;
-  width: 75px;
+  right: -65px;
+  width: 65px;
   height: 100%;
-  animation: slide-block 5s infinite linear;
+  animation: slide-block 4s infinite linear;
+  overflow: hidden;
 
   img {
-    width: 75px;
+    width: 65px;
   }
 
   .block-top {
@@ -68,7 +69,7 @@ export default {
 
   .hole {
     right: 0;
-    width: 75px;
+    width: 65px;
     background-color: rgba(0, 255, 34, 0.4);
   }
 

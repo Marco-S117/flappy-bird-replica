@@ -4,19 +4,15 @@
     <BirdColorSelector />
     <transition name="buttons-appear" mode="out-in" appear>
       <div class="buttons">
-        <BtnWithIcon
+        <Btn
           action="nuxt-link"
           to="/play"
-          icon="play"
-          iconWidth="20"
-          iconHeight="20"
+          label="play"
         />
-        <BtnWithIcon
+        <Btn
           action="nuxt-link"
-          to="/ranking"
-          icon="ranking"
-          iconWidth="30"
-          iconHeight="30"
+          to="/scores"
+          label="scores"
         />
       </div>
     </transition>
@@ -26,11 +22,11 @@
 <script>
 import Logo from '@/components/atoms/Logo'
 import BirdColorSelector from '@/components/molecules/BirdColorSelector'
-import BtnWithIcon from '@/components/atoms/BtnWithIcon'
+import Btn from '@/components/atoms/Btn'
 
 export default {
   name: 'HomePage',
-  components: { Logo, BirdColorSelector, BtnWithIcon }
+  components: { Logo, BirdColorSelector, Btn }
 }
 </script>
 

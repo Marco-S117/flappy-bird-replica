@@ -26,7 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .bird {
-  width: 75px;
+  width: 65px;
   height: auto;
   position: absolute;
   z-index: 1;

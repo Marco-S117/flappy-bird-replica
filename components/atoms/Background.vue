@@ -62,7 +62,7 @@ export default {
     background-repeat: repeat-x;
 
     &.moving {
-      animation: moving-bg 10s infinite linear;
+      animation: moving-bg 8s infinite linear;
     }
 
     &.landscape {
@@ -77,7 +77,7 @@ export default {
 
 @keyframes moving-bg {
   100% {
-    background-position: -200vw 0;
+    background-position: -1000px 0;
   }
 }
 </style>

@@ -1,21 +1,21 @@
 <template>
   <div>
-    <BtnWithIcon
+    <Btn
       @click="onClick"
       action="button"
       :icon="nightMode ? 'sun': 'moon'"
-      iconWidth="30"
-      iconHeight="30"
+      iconWidth="24"
+      iconHeight="24"
       squared
     />
   </div>
 </template>
 
 <script>
-import BtnWithIcon from '@/components/atoms/BtnWithIcon'
+import Btn from '@/components/atoms/Btn'
 
 export default {
-  components: { BtnWithIcon },
+  components: { Btn },
   name: 'ThemeSwitcher',
   data () {
     return {

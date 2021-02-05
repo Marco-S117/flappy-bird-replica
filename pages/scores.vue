@@ -1,6 +1,6 @@
 <template>
   <div class="ranking-page-container absolute">
-    <h1 class="arcade-font page-title">Ranking</h1>
+    <h1 class="arcade-font page-title">Scores</h1>
     <p>Coming Soon</p>
   </div>
 </template>

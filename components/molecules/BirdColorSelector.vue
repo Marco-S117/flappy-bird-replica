@@ -2,12 +2,12 @@
   <transition name="selector-appear" mode="out-in" appear>
     <div class="bird-selector">
       <transition name="fade" mode="out-in">
-        <BtnWithIcon
+        <Btn
           v-show="showPrev"
           action="button"
           icon="arrow"
-          iconWidth="24"
-          iconHeight="24"
+          iconWidth="18"
+          iconHeight="18"
           squared
           @click.stop="onPrevClick"
           class="arrow prev"
@@ -21,12 +21,12 @@
         />
       </transition>
       <transition name="fade" mode="out-in">
-        <BtnWithIcon
+        <Btn
           v-show="showNext"
           action="button"
           icon="arrow-reverse"
-          iconWidth="24"
-          iconHeight="24"
+          iconWidth="18"
+          iconHeight="18"
           squared
           @click.stop="onNextClick"
           class="arrow next"
@@ -37,12 +37,12 @@
 </template>
 
 <script>
-import BtnWithIcon from '@/components/atoms/BtnWithIcon'
+import Btn from '@/components/atoms/Btn'
 import Bird from '@/components/atoms/Bird'
 
 export default {
   name: 'BirdColorSelector',
-  components: { BtnWithIcon, Bird },
+  components: { Btn, Bird },
   data () {
     return {
       colorIndex: 0,
