@@ -47,40 +47,6 @@ export default {
   opacity: 0;
 }
 
-.to-left-slide-enter-active,
-.to-left-slide-leave-active {
-  transform-origin: top;
-  transition: all 0.4s;
-}
-
-.to-left-slide-enter {
-  opacity: 0;
-  left: 10% !important;
-  transform: translateX(-10%) scale(0) !important;
-}
-.to-left-slide-leave-to {
-  opacity: 0;
-  left: 90% !important;
-  transform: translateX(-90%) scale(0) !important;
-}
-
-.to-right-slide-enter-active,
-.to-right-slide-leave-active {
-  transform-origin: top;
-  transition: all 0.4s;
-}
-.to-right-slide-enter {
-  opacity: 0;
-  left: 90% !important;
-  transform: translateX(-90%) scale(0) !important;
-}
-
-.to-right-slide-leave-to {
-  opacity: 0;
-  left: 10% !important;
-  transform: translateX(-10%) scale(0) !important;
-}
-
 /* Typography */
 @font-face {
   font-family: ArcadeFont;
