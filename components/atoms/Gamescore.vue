@@ -1,15 +1,8 @@
 <template>
   <div class="gamescore-container absolute">
     <div class="score absolute center">
-      <!-- TO DO: Implemetare punteggio con immagini -->
-      <!-- <img
-        v-for="number in gamescore"
-        :key="number"
-        :src="number"
-        width="60px"
-        height="auto"
-      > -->
-      <h1 class="flappy-font score">{{ score }}</h1>
+      <!-- TO DO: Spostare punteggio in alto a SX con icona moneta -->
+      <h1 class="score">{{ score }}</h1>
     </div>
   </div>
 </template>
@@ -22,21 +15,6 @@ export default {
       type: Number,
       required: false
     }
-  },
-  // data () {
-  //   return {
-  //     imgScore: []
-  //   }
-  // },
-  computed: {
-    // TO DO: Implemetare punteggio con immagini
-    // gamescore () {
-    //   this.score.toString().split('').forEach(n => {
-    //     this.imgScore.push(require(`@/assets/sprites/score/${n}.png`))
-    //   })
-
-    //   return this.imgScore
-    // }
   }
 }
 </script>
@@ -48,17 +26,8 @@ export default {
   left: 50%;
   transform: translate(-15%, -50%);
 
-  // .score {
-  //   display: flex;
-  //   align-items: center;
-
-  //   img {
-  //     margin: 0 4px;
-  //   }
-  // }
-
   .score {
-    font-size: 100px;
+    font-size: 120px;
   }
 }
 </style>

@@ -61,6 +61,7 @@ export default {
 
 h1 {
   font-size: 64px;
+  text-shadow: 2px 2px #543847;
 }
 
 p {
@@ -70,7 +71,8 @@ p {
 /* Reset */
 * {
   font-family: ArcadeFont;
-  color: #543847;
+  color: #ffffff;
+  text-shadow: 1px 1px #543847;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
