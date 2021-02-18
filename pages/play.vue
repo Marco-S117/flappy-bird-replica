@@ -25,8 +25,9 @@ export default {
   beforeMount () {
     if (!this.$root.birdColor) {
       this.$router.push({ name: 'index' })
+    } else {
+      this.$nuxt.$emit('game-started')
     }
-    this.$nuxt.$emit('game-started')
   },
   mounted () {
     if (this.$refs.bird) {
@@ -34,7 +35,7 @@ export default {
     }
   },
   beforeDestroy () {
-    this.$nuxt.$emit('game-over')
+    // this.$nuxt.$emit('game-over')
   },
   data () {
     return {
@@ -46,12 +47,13 @@ export default {
   },
   methods: {
     startGame () {
-      setInterval(() => {
+      const GRAVITY_INTERVAL = setInterval(() => {
         this.addGravity()
       }, 10)
 
-      // BUG: Incremento multiplo del punteggio se si usa una setInterval
-      this.checkScore()
+      const SCORE_INTERVAL = setInterval(() => {
+        this.checkScore()
+      }, 1000)
     },
     fly () {
       const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
@@ -81,6 +83,7 @@ export default {
       if (BIRD_LEFT > HOLE_RIGHT && !this.isScored) {
         this.isScored = true
         this.score++
+        this.$nuxt.$emit('play-audio', 'point')
       }
     },
     detectCollision () {

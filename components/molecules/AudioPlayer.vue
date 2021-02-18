@@ -3,65 +3,50 @@
     <Btn
       @click="onClick"
       action="button"
-      :icon="audioEnabled ? 'audio-on': 'audio-off'"
+      :icon="isAudioEnabled ? 'audio-on': 'audio-off'"
       iconWidth="18"
       iconHeight="18"
       squared
     />
-    <audio
-      v-if="!!(audioEnabled && audio)"
-      crossorigin
-      preload="auto"
-      @ended="audio = null"
-      ref="audio"
-    >
-      <source :src="current" type="audio/ogg" />
-    </audio>
   </div>
 </template>
 
 <script>
+import { Howl, Howler } from 'howler'
 import Btn from '@/components/atoms/Btn'
-import die from '@/assets/audio/die.ogg'
-import hit from '@/assets/audio/hit.ogg'
-import point from '@/assets/audio/point.ogg'
-import swoosh from '@/assets/audio/swoosh.ogg'
-import wing from '@/assets/audio/wing.ogg'
-import click from '@/assets/audio/click.ogg'
+import Sprites from '@/assets/audio/sprites.mp3'
 
 export default {
   components: { Btn },
   name: 'AudioPlayer',
   data () {
     return {
-      audioEnabled: true,
-      audio: null,
-      die,
-      hit,
-      point,
-      swoosh,
-      wing,
-      click
+      isAudioEnabled: true,
+      Sprites
     }
   },
   mounted () {
     this.$nuxt.$on('play-audio', (audio) => {
-      this.audio = audio
-      if (this.audioEnabled) {
-        this.$nextTick(() => {
-          this.$refs.audio.play()
-        })
+      if (this.isAudioEnabled) {
+        this.Howl.play(audio)
+      }
+    })
+
+    this.Howl = new Howl({
+      src: [this.Sprites],
+      sprite: {
+        click: [0, 300],
+        die: [320, 1000],
+        hit: [1400, 700],
+        point: [1900, 1000],
+        swoosh: [3150, 1000],
+        wing: [5000, 300]
       }
     })
   },
-  computed: {
-    current () {
-      return this[this.audio]
-    }
-  },
   methods: {
     onClick () {
-      this.audioEnabled = !this.audioEnabled
+      this.isAudioEnabled = !this.isAudioEnabled
       this.$nuxt.$emit('play-audio', 'click')
     }
   }
