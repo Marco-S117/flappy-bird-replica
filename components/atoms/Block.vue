@@ -1,7 +1,7 @@
 <template>
   <div
     ref="block"
-    class="block-container absolute"
+    class="block-container absolute isMoving"
   >
     <img
       :src="GreenPipe"
@@ -38,10 +38,14 @@ export default {
     }
   },
   mounted () {
+    this.$nuxt.$on('game-over', () => {
+      this.$refs.block.style.webkitAnimationPlayState = 'paused'
+    })
     this.$refs.block.addEventListener('animationiteration', () => {
       this.random = Math.floor(Math.random() * 50) + 1
       this.top = this.random
       this.bottom = 50 - this.top
+      this.$nuxt.$emit('check-score')
     })
   }
 }
@@ -54,8 +58,8 @@ export default {
   right: -65px;
   width: 65px;
   height: 100%;
-  animation: slide-block 4s infinite linear;
   overflow: hidden;
+  animation: moving-block 4s infinite linear;
 
   img {
     width: 65px;
@@ -80,7 +84,7 @@ export default {
 }
 
 
-@keyframes slide-block {
+@keyframes moving-block {
   from {
     top: 0;
     right: -75px;

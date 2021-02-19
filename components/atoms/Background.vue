@@ -3,14 +3,14 @@
     <transition name="fade" mode="out-in" appear>
       <div
         :style="{ backgroundImage: `url(${backgroundImage})` }"
-        :class="{ 'moving': moving }"
+        :class="{ 'isMoving': isMoving }"
         class="landscape"
       >
       </div>
     </transition>
     <div
       :style="{ backgroundImage: `url(${BgImageFloor})` }"
-      :class="{ 'moving': moving }"
+      :class="{ 'isMoving': isMoving }"
       class="base"
     >
     </div>
@@ -25,15 +25,15 @@ import BgImageFloor from '@/assets/sprites/base.png'
 export default {
   name: 'Background',
   beforeMount () {
-    this.$nuxt.$on('game-started', () => { this.moving = true })
-    this.$nuxt.$on('game-over', () => { this.moving = false })
+    this.$nuxt.$on('game-started', () => { this.isMoving = true })
+    this.$nuxt.$on('game-over', () => { this.isMoving = false })
   },
   data () {
     return {
       BgImageDay,
       BgImageNight,
       BgImageFloor,
-      moving: false
+      isMoving: false
     }
   },
   computed: {
@@ -58,7 +58,7 @@ export default {
     background-size: cover;
     background-repeat: repeat-x;
 
-    &.moving {
+    &.isMoving {
       animation: moving-bg 8s infinite linear;
     }
 
