@@ -22,11 +22,6 @@ export default {
       window.addEventListener('dblclick', () => { return false })
       window.oncontextmenu = () => { return false }
     }
-
-    this.$root.settings = {
-      grativy: 6,
-      jump: 130
-    }
   },
   watch: {
     $route (to, from) {
@@ -102,6 +97,11 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  &.full {
+    width: 100%;
+    height: 100%;
   }
 }
 

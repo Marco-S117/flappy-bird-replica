@@ -4,12 +4,18 @@
     @click="fly"
     class="play-page-container absolute"
   >
-    <Gamescore :score="score" />
+    <transition name="fade" mode="out-in">
+      <GameOverModal v-show="isGameOver" :score="score" />
+    </transition>
+    <transition name="fade" mode="out-in">
+      <Gamescore v-show="!isGameOver" :score="score" />
+    </transition>
     <Bird
       :color="$root.birdColor"
       :state="birdState"
       ref="bird"
-      class="isPlaying-bird"
+      :class="{ 'isDead': isGameOver }"
+      class="bird"
     />
     <Block ref="block" />
   </div>
@@ -19,9 +25,10 @@
 import Gamescore from '@/components/atoms/Gamescore'
 import Bird from '@/components/atoms/Bird'
 import Block from '@/components/atoms/Block'
+import GameOverModal from '@/components/molecules/GameOverModal'
 
 export default {
-  components: { Gamescore, Bird, Block },
+  components: { Gamescore, Bird, Block, GameOverModal },
   beforeMount () {
     if (!this.$root.birdColor) {
       this.$router.push({ name: 'index' })
@@ -31,9 +38,6 @@ export default {
     if (this.$refs.bird) {
       this.onGameStart()
     }
-  },
-  beforeDestroy () {
-    this.$nuxt.$emit('game-over')
   },
   data () {
     return {
@@ -57,6 +61,7 @@ export default {
     onGameOver () {
       console.log('game over')
       this.$nuxt.$emit('game-over')
+      this.$nuxt.$emit('play-audio', 'hit')
       this.$nuxt.$emit('play-audio', 'die')
       clearInterval(this.grativyInterval)
       this.isGameOver = true
@@ -65,13 +70,13 @@ export default {
       const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
 
       if (!this.isFlying) {
-        this.$refs.bird.$el.style.top = (BIRD_TOP + this.$root.settings.grativy) + 'px'
+        this.$refs.bird.$el.style.top = (BIRD_TOP + 4) + 'px'
       }
     },
     fly () {
       if (!this.isGameOver) {
         const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
-        this.$refs.bird.$el.style.top = (BIRD_TOP - this.$root.settings.jump) + 'px'
+        this.$refs.bird.$el.style.top = (BIRD_TOP - 65) + 'px'
 
         this.$nuxt.$emit('play-audio', 'wing')
         this.isFlying = true
@@ -97,10 +102,10 @@ export default {
       const BIRD_B = parseInt(this.$refs.bird.$el.getBoundingClientRect().bottom)
       const BIRD_L = parseInt(this.$refs.bird.$el.getBoundingClientRect().left)
 
-      const HOLE_W = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().width)
-      const HOLE_H = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().height)
-      const HOLE_X = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().x)
-      const HOLE_Y = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().y)
+      // const HOLE_W = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().width)
+      // const HOLE_H = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().height)
+      // const HOLE_X = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().x)
+      // const HOLE_Y = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().y)
       const HOLE_T = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().top)
       const HOLE_R = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().right)
       const HOLE_B = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().bottom)
@@ -108,7 +113,11 @@ export default {
 
       let isGameOver = false
 
-      if ((BIRD_B <= HOLE_T || BIRD_T >= HOLE_B) && (BIRD_R >= HOLE_L && BIRD_L <= HOLE_R)) {
+      if ((BIRD_B < HOLE_T || BIRD_T > HOLE_B) && (BIRD_R > HOLE_L && BIRD_L < HOLE_R)) {
+        isGameOver = true
+      }
+
+      if (BIRD_B >= 672) {
         isGameOver = true
       }
 
@@ -124,8 +133,14 @@ export default {
   width: 100%;
   overflow: hidden;
 
-  .isPlaying-bird {
-    transition: top 0.001s linear;
+  .bird {
+    z-index: 11;
+    transition: top 0.001s ease-in-out;
+
+    &.isDead {
+      transition: top 0.5s ease-in;
+      top: 592px !important;
+    }
   }
 }
 </style>

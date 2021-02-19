@@ -37,10 +37,14 @@ export default {
       random: 0
     }
   },
-  mounted () {
+  created () {
     this.$nuxt.$on('game-over', () => {
-      this.$refs.block.style.webkitAnimationPlayState = 'paused'
+      if (this.$refs.block) {
+        this.$refs.block.style.webkitAnimationPlayState = 'paused'
+      }
     })
+  },
+  mounted () {
     this.$refs.block.addEventListener('animationiteration', () => {
       this.random = Math.floor(Math.random() * 50) + 1
       this.top = this.random
