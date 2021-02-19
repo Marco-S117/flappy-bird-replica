@@ -1,7 +1,10 @@
 <template>
   <transition name="logo-appear" mode="out-in" appear>
     <div class="logo">
-      <img :src="Logo">
+      <div class="img">
+        <div class="version-badge absolute">Alpha</div>
+        <img :src="Logo">
+      </div>
       <hr>
       <p>REPLICA</p>
     </div>
@@ -26,7 +29,7 @@ export default {
 .logo-appear-leave-active {
   transition: all 1s;
 
-  img {
+  .img {
     transition: all 0.2s;
     transition-delay: 0.2s;
   }
@@ -44,7 +47,7 @@ export default {
 
 .logo-appear-enter,
 .logo-appear-leave-to {
-  img,
+  .img,
   hr,
   p {
     opacity: 0;
@@ -53,6 +56,17 @@ export default {
 }
 
 .logo {
+  position: relative;
+
+  .version-badge {
+    top: -26px;
+    right: 0;
+    background-color: #fff;
+    padding: 1px 4px;
+    border-radius: 2px;
+    color: #d8be2c;
+  }
+
   img {
     pointer-events: none;
     width: 100%;
