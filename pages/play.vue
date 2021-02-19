@@ -92,41 +92,23 @@ export default {
       }
     },
     detectCollision () {
-      // Bird dom rect
-      const BIRD_TOP = parseInt(this.$refs.bird.$el.getBoundingClientRect().top)
-      const BIRD_RIGHT = parseInt(this.$refs.bird.$el.getBoundingClientRect().right)
-      const BIRD_BOTTOM = parseInt(this.$refs.bird.$el.getBoundingClientRect().bottom)
-      const BIRD_LEFT = parseInt(this.$refs.bird.$el.getBoundingClientRect().left)
+      const BIRD_T = parseInt(this.$refs.bird.$el.getBoundingClientRect().top)
+      const BIRD_R = parseInt(this.$refs.bird.$el.getBoundingClientRect().right)
+      const BIRD_B = parseInt(this.$refs.bird.$el.getBoundingClientRect().bottom)
+      const BIRD_L = parseInt(this.$refs.bird.$el.getBoundingClientRect().left)
 
-      // Top block dom rect
-      // const TOP_BLOCK_X = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().x)
-      // const TOP_BLOCK_Y = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().y)
-      const TOP_BLOCK_W = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().width)
-      const TOP_BLOCK_H = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().height)
-      const TOP_BLOCK_TOP = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().top)
-      const TOP_BLOCK_RIGHT = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().right)
-      const TOP_BLOCK_BOTTOM = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().bottom)
-      const TOP_BLOCK_LEFT = parseInt(this.$refs.block.$el.children[0].getBoundingClientRect().left)
-
-      // Bottom block dom rect
-      // const BOTTOM_BLOCK_X = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().x)
-      // const BOTTOM_BLOCK_Y = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().y)
-      const BOTTOM_BLOCK_W = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().width)
-      const BOTTOM_BLOCK_H = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().height)
-      const BOTTOM_BLOCK_TOP = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().top)
-      const BOTTOM_BLOCK_RIGHT = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().right)
-      const BOTTOM_BLOCK_BOTTOM = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().bottom)
-      const BOTTOM_BLOCK_LEFT = parseInt(this.$refs.block.$el.children[2].getBoundingClientRect().left)
+      const HOLE_W = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().width)
+      const HOLE_H = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().height)
+      const HOLE_X = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().x)
+      const HOLE_Y = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().y)
+      const HOLE_T = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().top)
+      const HOLE_R = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().right)
+      const HOLE_B = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().bottom)
+      const HOLE_L = parseInt(this.$refs.block.$el.children[1].getBoundingClientRect().left)
 
       let isGameOver = false
 
-      if (BIRD_RIGHT >= TOP_BLOCK_LEFT && BIRD_TOP <= TOP_BLOCK_H) {
-        console.log('collided with the front of the top block')
-        isGameOver = true
-      }
-
-      if (BIRD_RIGHT >= BOTTOM_BLOCK_LEFT && BIRD_TOP >= BOTTOM_BLOCK_H) {
-        console.log('collided with the front of the bottom block')
+      if ((BIRD_B <= HOLE_T || BIRD_T >= HOLE_B) && (BIRD_R >= HOLE_L && BIRD_L <= HOLE_R)) {
         isGameOver = true
       }
 
