@@ -85,7 +85,7 @@ export default {
       ogTitle: 'Flappy Bird - Made with Nuxt Js',
       ogDescription: '',
       ogHost: 'https://nuxt-flappy-bird.netlify.app/',
-      ogImage: 'https://nuxt-flappy-bird.netlify.app/og-image.jpg',
+      ogImage: 'https://nuxt-flappy-bird.netlify.app/og-image.png',
       ogUrl: 'https://nuxt-flappy-bird.netlify.app/'
     },
     workbox: {
