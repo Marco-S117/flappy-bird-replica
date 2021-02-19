@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     onGameStart () {
+      console.log(this.isGameOver);
       this.$nuxt.$emit('game-started')
       this.$nuxt.$on('check-score', () => { this.checkScore() })
       this.isGameOver = false
@@ -67,10 +68,10 @@ export default {
       this.isGameOver = true
     },
     addGravity () {
-      const BIRD_TOP = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
+      const BIRD_T = parseInt(window.getComputedStyle(this.$refs.bird.$el).getPropertyValue('top'))
 
       if (!this.isFlying) {
-        this.$refs.bird.$el.style.top = (BIRD_TOP + 4) + 'px'
+        this.$refs.bird.$el.style.top = (BIRD_T + 4) + 'px'
       }
     },
     fly () {
@@ -92,8 +93,6 @@ export default {
       if (!this.isGameOver) {
         this.score++
         this.$nuxt.$emit('play-audio', 'point')
-      } else {
-        this.onGameOver()
       }
     },
     detectCollision () {
