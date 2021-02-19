@@ -52,8 +52,45 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    icon: {
+      /* icon options */
+      source: 'static/icon.png',
+      sizes: [64, 120, 144, 152, 192, 384, 512],
+      targetDir: 'icons',
+      purpose: ['any', 'maskable']
+    },
     manifest: {
-      lang: 'en'
+      name: 'Flappy Bird - Made with Nuxt Js',
+      short_name: 'Flappy Bird - Replica',
+      description: '',
+      display: 'standalone',
+      background_color: '#ffffff',
+      theme_color: '#333333',
+      lang: 'en',
+      useWebmanifestExtension: false,
+    },
+    meta: {
+      /* meta options */
+      nativeUI: true,
+      mobileApp: true,
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'black',
+      favicon: 'https://nuxt-flappy-bird.netlify.app/favicon.ico',
+      name: 'Flappy Bird - Made with Nuxt Js',
+      author: 'Marco Polino',
+      description: '',
+      lang: 'en',
+      ogType: 'website',
+      ogSiteName: 'Flappy Bird - Replica',
+      ogTitle: 'Flappy Bird - Made with Nuxt Js',
+      ogDescription: '',
+      ogHost: 'https://nuxt-flappy-bird.netlify.app/',
+      ogImage: 'https://nuxt-flappy-bird.netlify.app/og-image.jpg',
+      ogUrl: 'https://nuxt-flappy-bird.netlify.app/'
+    },
+    workbox: {
+      // /* workbox options */
+      // enabled: true // enable to test PWA on localhost, disable for prod
     }
   },
 
